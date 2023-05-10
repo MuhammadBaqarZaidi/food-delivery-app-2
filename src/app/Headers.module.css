@@ -1,0 +1,15 @@
+.header {
+  width: 100%;
+  max-width: 1000px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.headerRight,
+.headerLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
