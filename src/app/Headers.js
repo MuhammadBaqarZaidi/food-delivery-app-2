@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Headers.module.css';
+import CartButton from './CartButton';
 
 export default function Headers() {
   return (
@@ -10,7 +11,9 @@ export default function Headers() {
       </div>
 
       <div className={styles.headerLeft}>
-        <div className={styles.cartIcon}>Cart</div>
+        <div className={styles.cartIcon}>
+          <CartButton />
+        </div>
         <div className={styles.login}>Register / Login</div>
       </div>
     </div>

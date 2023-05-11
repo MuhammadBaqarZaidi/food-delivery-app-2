@@ -1,0 +1,32 @@
+.cartLayout {
+  position: absolute;
+  inset: 0;
+
+  /* background-color: #ffffff;
+  opacity: 0.2; */
+
+  backdrop-filter: blur(1px);
+
+  z-index: 500;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cartBox {
+  width: 300px;
+  height: 100%;
+
+  z-index: 1000;
+
+  position: relative;
+
+  background-color: var(secondarycolor);
+}
+
+.cartClose {
+  position: absolute;
+
+  right: 5px;
+  top: 5px;
+}
