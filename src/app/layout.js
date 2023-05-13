@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import Headers from './Headers';
 import Footers from './Footers';
+import Copyright from './Copyright';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,9 +18,12 @@ export default function RootLayout({ children }) {
         <header>
           <Headers />
         </header>
-        <main>{children}</main>
+        <main>
+          <div className="container">{children}</div>
+        </main>
         <footer>
           <Footers />
+          <Copyright />
         </footer>
       </body>
     </html>
