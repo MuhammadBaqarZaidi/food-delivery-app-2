@@ -1,5 +1,6 @@
 :root {
   --secondarycolor: #eee;
+  --cartWidth: 400px;
 }
 * {
   box-sizing: border-box;
@@ -24,6 +25,10 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+main {
+  padding: 4rem 2rem;
 }
 
 header {

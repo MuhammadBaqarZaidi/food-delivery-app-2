@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { Store } from './utils/Store';
-import Image from 'next/image';
-import Link from 'next/link';
-import CartButton from './CartButton';
+'use client';
 
-export default function CartBox() {
+import React, { useContext } from 'react';
+import { Store } from '../utils/Store';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export default function CartPage() {
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -12,6 +13,7 @@ export default function CartBox() {
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
+
   return (
     <div>
       <h1>CartPage</h1>
@@ -35,14 +37,17 @@ export default function CartBox() {
                 {cartItems.map((item) => (
                   <tr key={item.slug}>
                     <td>
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={50}
-                        height={50}
-                      ></Image>
+                      <Link href={`/product/${item.slug}`}>
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={50}
+                          height={50}
+                        ></Image>
+                        &nbsp;
+                        {item.name}
+                      </Link>
                     </td>
-                    <td>{item.name}</td>
                     <td>{item.quantity}</td>
                     <td>Rs. {item.price}</td>
                     <td>
@@ -53,8 +58,20 @@ export default function CartBox() {
               </tbody>
             </table>
           </div>
-          Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : Rs.
-          {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+          <div>
+            <ul>
+              <li>
+                <div>
+                  Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :
+                  Rs.
+                  {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+                </div>
+              </li>
+              <li>
+                <button>Check Out</button>
+              </li>
+            </ul>
+          </div>
         </div>
       )}
     </div>

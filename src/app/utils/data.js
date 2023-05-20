@@ -10,9 +10,9 @@ const data = {
       popular: true,
     },
     {
-      name: 'Corn Soup',
+      name: 'Cor Soup',
       slug: '02',
-      price: 550,
+      price: 450,
       category: 'Soups',
       image: '/images/corn-soup.jpg',
       description: 'Hot Soup for You',
