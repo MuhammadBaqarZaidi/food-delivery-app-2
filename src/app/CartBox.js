@@ -3,8 +3,9 @@ import { Store } from './utils/Store';
 import Image from 'next/image';
 import Link from 'next/link';
 import CartButton from './CartButton';
+import dynamic from 'next/dynamic';
 
-export default function CartBox() {
+function CartBox() {
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -60,3 +61,5 @@ export default function CartBox() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(CartBox), { ssr: false });

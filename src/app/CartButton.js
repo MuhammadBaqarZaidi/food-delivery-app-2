@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import CartBox from './CartBox';
 import styles from './CartButton.module.css';
 import { Store } from './utils/Store';
@@ -12,14 +12,17 @@ export default function CartButton() {
   const { state } = useContext(Store);
   const { cart } = state;
 
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  useEffect(() => {
+    setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
+  }, [cart.cartItems]);
+
   return (
     <div>
       <button onClick={() => setIsOpen(!isOpen)} className="styles.cartIcon">
-        CartIcon
-        {cart.cartItems.length > 0 && (
-          <span className={styles.cartNum}>
-            {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-          </span>
+        CartIcon......
+        {cartItemsCount > 0 && (
+          <span className={styles.cartNum}>{cartItemsCount}</span>
         )}
       </button>
 

@@ -4,8 +4,9 @@ import React, { useContext } from 'react';
 import { Store } from '../utils/Store';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
-export default function CartPage() {
+function CartPage() {
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -68,7 +69,7 @@ export default function CartPage() {
                 </div>
               </li>
               <li>
-                <button>Check Out</button>
+                <Link href="login?redirect=/shipping">Check Out</Link>
               </li>
             </ul>
           </div>
@@ -77,3 +78,5 @@ export default function CartPage() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(CartPage), { ssr: false });

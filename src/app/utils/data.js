@@ -1,4 +1,13 @@
 const data = {
+  users: [
+    {
+      name: 'Baqar Zaidi',
+      phone: 3312067823,
+      email: '786smbzfg@gmail.com',
+      isAdmin: true,
+    },
+  ],
+
   product: [
     {
       name: 'Corn Soup',
