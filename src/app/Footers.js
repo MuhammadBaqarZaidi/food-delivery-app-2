@@ -55,7 +55,7 @@ export default function Footers() {
           </a>
           <a>
             <Image
-              src="/twiter.svg"
+              src="/tweeter.svg"
               alt="twiter"
               width={50}
               height={50}
