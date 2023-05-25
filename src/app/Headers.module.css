@@ -1,6 +1,8 @@
 .header {
+  position: sticky;
   width: 100%;
   max-width: 1000px;
+  padding: 1rem;
 
   display: flex;
   align-items: center;

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Headers from './Headers';
 import Footers from './Footers';
 import Copyright from './Copyright';
+import { StoreProvider } from './utils/Store';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,19 +14,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <header>
-          <Headers />
-        </header>
-        <main>
-          <div className="container">{children}</div>
-        </main>
-        <footer>
-          <Footers />
-          <Copyright />
-        </footer>
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <header>
+            <Headers />
+          </header>
+          <main>
+            <div className="container">{children}</div>
+          </main>
+          <footer>
+            <Footers />
+            <Copyright />
+          </footer>
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

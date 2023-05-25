@@ -1,4 +1,13 @@
 const data = {
+  users: [
+    {
+      name: 'Baqar Zaidi',
+      phone: 3312067823,
+      email: '786smbzfg@gmail.com',
+      isAdmin: true,
+    },
+  ],
+
   product: [
     {
       name: 'Corn Soup',
@@ -10,9 +19,9 @@ const data = {
       popular: true,
     },
     {
-      name: 'Corn Soup',
+      name: 'Cor Soup',
       slug: '02',
-      price: 550,
+      price: 450,
       category: 'Soups',
       image: '/images/corn-soup.jpg',
       description: 'Hot Soup for You',

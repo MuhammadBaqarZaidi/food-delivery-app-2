@@ -1,5 +1,6 @@
 :root {
   --secondarycolor: #eee;
+  --cartWidth: 400px;
 }
 * {
   box-sizing: border-box;
@@ -26,6 +27,10 @@ footer {
   justify-content: center;
 }
 
+main {
+  padding: 4rem 2rem;
+}
+
 header {
   position: sticky;
 }
@@ -33,4 +38,9 @@ header {
 .container {
   width: 100%;
   max-width: 1000px;
+}
+
+h5 {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }

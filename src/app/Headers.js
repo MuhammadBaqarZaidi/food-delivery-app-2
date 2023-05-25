@@ -8,7 +8,11 @@ export default function Headers() {
     <div className={styles.header}>
       <div className={styles.headerRight}>
         <div className={styles.logo}>
+<<<<<<< HEAD
           <Link href="\">Logo</Link>
+=======
+          <Link href="/">Logo</Link>
+>>>>>>> f4506adaad1efc80943645b3dbb3b785910c811e
         </div>
         <div className={styles.menu}>
           <Link href="/menu">Menu</Link>

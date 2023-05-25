@@ -1,11 +1,12 @@
+'use client';
+
 import React, { useContext } from 'react';
-import { Store } from './utils/Store';
-import Image from 'next/image';
+import { Store } from '../utils/Store';
 import Link from 'next/link';
-import CartButton from './CartButton';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
-function CartBox() {
+function CartPage() {
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -13,6 +14,7 @@ function CartBox() {
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
+
   return (
     <div>
       <h1>CartPage</h1>
@@ -36,14 +38,17 @@ function CartBox() {
                 {cartItems.map((item) => (
                   <tr key={item.slug}>
                     <td>
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={50}
-                        height={50}
-                      ></Image>
+                      <Link href={`/product/${item.slug}`}>
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={50}
+                          height={50}
+                        ></Image>
+                        &nbsp;
+                        {item.name}
+                      </Link>
                     </td>
-                    <td>{item.name}</td>
                     <td>{item.quantity}</td>
                     <td>Rs. {item.price}</td>
                     <td>
@@ -54,12 +59,24 @@ function CartBox() {
               </tbody>
             </table>
           </div>
-          Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : Rs.
-          {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+          <div>
+            <ul>
+              <li>
+                <div>
+                  Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :
+                  Rs.
+                  {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+                </div>
+              </li>
+              <li>
+                <Link href="login?redirect=/shipping">Check Out</Link>
+              </li>
+            </ul>
+          </div>
         </div>
       )}
     </div>
   );
 }
 
-export default dynamic(() => Promise.resolve(CartBox), { ssr: false });
+export default dynamic(() => Promise.resolve(CartPage), { ssr: false });

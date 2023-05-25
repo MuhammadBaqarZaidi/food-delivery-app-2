@@ -1,77 +1,37 @@
 'use client';
 
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
-
-async function getData() {
-  const res = await fetch('https://api.example.com/...');
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
- 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
-  }
- 
-  return res.json();
-}
- 
-export default async function Page() {
-  const data = await getData();
- 
-  return <main></main>;
-}
-
-
-export async function getStaticProps({ params }) {
-  const searchResults = await getProducts(params.slug)
-  const coffeeProduct = searchResults[0]
-
-  return {
-    props: {
-      product: coffeeProduct,
-    },
-  }
-}
-
-export async function getStaticPaths() {
-  const coffeeProducts = await getProducts('coffee')
-  let fullPaths = []
-
-  for (let product of coffeeProducts) {
-    fullPaths.push({ params: { slug: product.id } })
-  }
-
-  return {
-    paths: fullPaths,
-    fallback: 'blocking',
-  }
-}
-
+import data from '../../utils/data';
+import { Store } from '../../utils/Store';
 
 // Return a list of `params` to populate the [slug] dynamic segment
-// export async function generateStaticParams() {
-//   const product = await fetch('../../utils/data').then((res) => res.json());
+export async function generateStaticParams() {
+  const prod = await fetch('../../utils/data').then((res) => res.json());
 
-//   return product.map((product) => ({
-//     slug: product.slug,
-//     name: product.name,
-//   }));
-// }
-
-
+  return prod.map((product) => ({
+    slug: product.slug,
+  }));
+}
 
 // Multiple versions of this page will be statically generated
 // using the `params` returned by `generateStaticParams`
-export default function ProductPage({ product }) {
-  // , { params: { slug: string } }
-  // const { slug, name } = params;
-  // ...
-  // if (!product) {
-  //   return <div>Product Not Found</div>;
-  // }
+export default function ProductPage({ params }) {
+  const { state, dispatch } = useContext(Store);
+
+  const product = data.product.find((x) => x.slug === params.slug);
+
+  if (!product) {
+    return <div>Product Not Found</div>;
+  }
+
+  const addToCartHandler = () => {
+    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+  };
 
   return (
     <div className={styles.product}>
@@ -88,7 +48,9 @@ export default function ProductPage({ product }) {
         <p>Hot served with chicken and corn stock based soup</p>
         <p className={styles.price}>Rs. 550</p>
         <div className={styles.add}>
-          <button className={styles.addToCart}>Add to Cart</button>
+          <button className={styles.addToCart} onClick={addToCartHandler}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

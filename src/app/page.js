@@ -24,12 +24,14 @@ export default function Home() {
       </div>
       <div className="top">
         <h3>Top Selling</h3>
-        <div className={styles.products}>
+        <div className={styles.topProduct}>
           {data &&
             data.product &&
-            data.product.map((product) => (
-              <ProductCard product={product} key={product.slug}></ProductCard>
-            ))}
+            data.product
+              .filter((product) => product.popular)
+              .map((product) => (
+                <ProductCard product={product} key={product.slug}></ProductCard>
+              ))}
         </div>
       </div>
     </>
